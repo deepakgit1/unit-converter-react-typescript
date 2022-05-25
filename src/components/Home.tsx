@@ -103,7 +103,7 @@ const Home = (props: Props) => {
                 </Form.Select>
                 <Form.Label className='mt-2 h5 text-light' defaultValue={result} size="lg">Result</Form.Label>
 
-                <Form.Control type="number" defaultValue={result} placeholder='Result' />
+                <Form.Control disabled type="text" defaultValue={result} placeholder='Result' />
                 <div className='d-grid gap-2 mt-3'>
                     <Button className='button' style={{borderRadius:"10px"}} size='lg' onClick={handleClick}>Convert</Button>
                 </div>
