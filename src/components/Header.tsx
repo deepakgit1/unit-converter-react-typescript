@@ -1,13 +1,17 @@
 import React from 'react'
 import { Button, Container, Navbar } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 import "./css/header.css"
 
-type Props = {
-  setUser: React.Dispatch<React.SetStateAction<boolean>>
-  user: boolean
-}
+type Props = {}
 
-const Header = ({ user, setUser }: Props) => {
+const Header = ({ }: Props) => {
+  const navigate = useNavigate()
+    const handleLogout=()=>{
+      localStorage.clear()
+      navigate("/login")
+    }
+    
   return (
     <div>
       <>
@@ -16,9 +20,7 @@ const Header = ({ user, setUser }: Props) => {
             <Navbar.Brand href="#home" className='m-auto h1' style={{ fontFamily: "cursive" }}>
               Welcome to Unit Converter
             </Navbar.Brand>
-            {
-              user ? <Button variant="outline-light" onClick={() => setUser(false)}>Logout</Button> : ""
-            }
+          <Button variant="outline-light" onClick={handleLogout} >Logout</Button>
           </Container>
         </Navbar>
       </>

@@ -3,9 +3,8 @@ import { Action } from "../actions/actions";
 const initialVal = ""
 
 const changeUnit = (state=initialVal,action:Action)=>{
-    console.log("from change unit ")
-    console.log(action)
-    if(action.type=="CONVERT"){
+   
+    if(action.type==="CONVERT"){
         if (action.payload.inputUnit === "KGS") {
             switch (action.payload.outputUnit) {
                 case "KGS": return action.payload.val * 1;

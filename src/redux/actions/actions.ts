@@ -5,7 +5,8 @@ interface iVal{
 }
 
 interface LoginVal{
-
+    username: string,
+    password: string
 }
 
 export type Action ={

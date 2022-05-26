@@ -1,9 +1,11 @@
-import React, { FormEvent, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import "../components/css/home.css"
 import {SiConvertio} from "react-icons/si"
 import { useDispatch, useSelector } from 'react-redux'
 import { convertUnit } from '../redux/actions/actions'
+import Header from './Header'
+import { useNavigate } from 'react-router-dom'
 // import {convertUnit} from '../redux/actions/actions'
 
 type Props = {}
@@ -12,11 +14,9 @@ const Home = (props: Props) => {
     const [inputUnit, setInputUnit] = useState<number | string>()
     const [outputUnit, setOutputUnit] = useState<any>()
     const [val, setVal] = useState<any>()
-    const [result, setResult] = useState<number>()
-    
+    const navigate = useNavigate()
+
     const myResult = useSelector((state:any)=>state.changeUnit)
-    console.log("from my res ")
-    console.log(myResult)
     const dispatch = useDispatch()
     
     const handleClick = () => {
@@ -29,9 +29,18 @@ const Home = (props: Props) => {
         dispatch(convertUnit(data))
     }
 
+    const validUser = localStorage.getItem("user")
+    // console.log(validUser);
+
+    useEffect(()=>{
+        if(!validUser){
+            navigate("/login")
+        }
+    },[validUser])
 
     return (
         <div>
+            <Header/>
             <Container className='w-50 mt-2' 
             style={{background:"linear-gradient(to right, #36d1dc, #5b86e5)",
             padding:"50px",
