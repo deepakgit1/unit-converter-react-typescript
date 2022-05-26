@@ -10,10 +10,15 @@ function App() {
   
   return (
     <div>
-      <Header setUser={setUser} user={user}/>
 
       {
-        user?<Home />: <Login setUser={setUser}/>
+        user?
+        <>
+              <Header setUser={setUser} user={user}/>
+
+        <Home />
+        </>
+        : <Login setUser={setUser}/>
       }
     </div>
   );
