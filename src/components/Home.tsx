@@ -2,6 +2,9 @@ import React, { FormEvent, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import "../components/css/home.css"
 import {SiConvertio} from "react-icons/si"
+import { useDispatch, useSelector } from 'react-redux'
+import { convertUnit } from '../redux/actions/actions'
+// import {convertUnit} from '../redux/actions/actions'
 
 type Props = {}
 
@@ -10,60 +13,20 @@ const Home = (props: Props) => {
     const [outputUnit, setOutputUnit] = useState<any>()
     const [val, setVal] = useState<any>()
     const [result, setResult] = useState<number>()
-
+    
+    const myResult = useSelector((state:any)=>state.changeUnit)
+    console.log("from my res ")
+    console.log(myResult)
+    const dispatch = useDispatch()
+    
     const handleClick = () => {
         // console.log("unit",inputUnit , outputUnit);
-        if (inputUnit === "KGS") {
-            switch (outputUnit) {
-                case "KGS": setResult(val * 1); break;
-                case "GMS": setResult(val * 1000); break;
-                case "MGS": setResult(val * 1000000); break;
-                case "POUND": setResult(val * 2.2046244202); break;
-                case "TONNE": setResult(val * 0.001); break;
-                default:
-                    break;
-            }
-        } else if (inputUnit === "GMS") {
-            switch (outputUnit) {
-                case "KGS": setResult(val * 0.001); break;
-                case "GMS": setResult(val * 1); break;
-                case "MGS": setResult(val * 1000); break;
-                case "POUND": setResult(val * 0.0022046244); break;
-                case "TONNE": setResult(val * 0.000001); break;
-                default:
-                    break;
-            }
-        } else if (inputUnit === "MGS") {
-            switch (outputUnit) {
-                case "KGS": setResult(val * 0.000001); break;
-                case "GMS": setResult(val * 0.001); break;
-                case "MGS": setResult(val * 1); break;
-                case "POUND": setResult(val * 0.0000022046); break;
-                case "TONNE": setResult(val * 0.000000001); break;
-                default:
-                    break;
-            }
-        } else if (inputUnit === "POUND") {
-            switch (outputUnit) {
-                case "KGS": setResult(val * 0.453592); break;
-                case "GMS": setResult(val * 453.592); break;
-                case "MGS": setResult(val * 453592); break;
-                case "POUND": setResult(val * 1); break;
-                case "TONNE": setResult(val * 0.000453592); break;
-                default:
-                    break;
-            }
-        } else if (inputUnit === "TONNE") {
-            switch (outputUnit) {
-                case "KGS": setResult(val * 1000); break;
-                case "GMS": setResult(val * 1000000); break;
-                case "MGS": setResult(val * 1000000000); break;
-                case "POUND": setResult(val * 2204.6244202); break;
-                case "TONNE": setResult(val * 1); break;
-                default:
-                    break;
-            }
+        const data={
+            inputUnit:inputUnit,
+            outputUnit:outputUnit,
+            val:val
         }
+        dispatch(convertUnit(data))
     }
 
 
@@ -101,9 +64,9 @@ const Home = (props: Props) => {
                     <option value="POUND">Pound</option>
                     <option value="TONNE">Tonne</option>
                 </Form.Select>
-                <Form.Label className='mt-2 h5 text-light' defaultValue={result} size="lg">Result</Form.Label>
+                <Form.Label className='mt-2 h5 text-light' defaultValue={myResult} size="lg">Result</Form.Label>
 
-                <Form.Control disabled type="text" defaultValue={result} placeholder='Result' />
+                <Form.Control disabled type="text" defaultValue={myResult} placeholder='Result' />
                 <div className='d-grid gap-2 mt-3'>
                     <Button className='button' style={{borderRadius:"10px"}} size='lg' onClick={handleClick}>Convert</Button>
                 </div>
