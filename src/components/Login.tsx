@@ -17,17 +17,20 @@ const Login = (props: Props) => {
     const userData = useSelector((state:any)=>state)
     const dispatch = useDispatch()
 
-    // console.log(userData);
+    console.log(userData);
 
-    const handleSubmit =()=>{
+    const handleSubmit =async()=>{
         const  data = {
             username:username,
             password:password
         }
         dispatch(loginAuth(data))
+
     }
 
-    
+    if(userData.authUser === "user"){
+        navigate("/")
+    }
 
     return (
         <div>

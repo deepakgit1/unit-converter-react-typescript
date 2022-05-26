@@ -1,13 +1,13 @@
 import { LoginType } from "../actions/actions";
 
-const initialVal = false;
+const initialVal = "";
 
 const authUser =(state=initialVal,action:LoginType)=>{
     // console.log(action)
     if(action.type === "LOGIN"){
         if(action.payload.username === "user" && action.payload.password === "password"){
             localStorage.setItem("user",action.payload.username)
-            return state
+            return state = "user"
         }else if(action.payload.username === "" || action.payload.password === "" ){
            alert("Please Enter All Credentials.");
            return state
