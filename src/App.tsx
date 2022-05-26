@@ -6,9 +6,6 @@ import {BrowserRouter as Router,Route, Routes} from "react-router-dom"
 
 function App() {
   
-  // const [user,setUser] = useState<boolean>(false)
-  // console.log(user);
-  
   return (
     <Router>
       <Routes>

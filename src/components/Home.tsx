@@ -1,84 +1,73 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Container, Form } from 'react-bootstrap'
-import "../components/css/home.css"
-import {SiConvertio} from "react-icons/si"
-import { useDispatch, useSelector } from 'react-redux'
-import { convertUnit } from '../redux/actions/actions'
+import React, { useEffect } from 'react'
+import { Container } from 'react-bootstrap'
+import { SiConvertio } from "react-icons/si"
 import Header from './Header'
 import { useNavigate } from 'react-router-dom'
-// import {convertUnit} from '../redux/actions/actions'
+//mui
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+//components
+import Length from './units/Length'
+import WaightUnit from './units/WaightUnit'
+import "../components/css/home.css"
+import AreaUnit from './units/AreaUnit'
 
 type Props = {}
 
 const Home = (props: Props) => {
-    const [inputUnit, setInputUnit] = useState<number | string>()
-    const [outputUnit, setOutputUnit] = useState<any>()
-    const [val, setVal] = useState<any>()
+
+    const [value, setValue] = React.useState('1');
     const navigate = useNavigate()
 
-    const myResult = useSelector((state:any)=>state.changeUnit)
-    const dispatch = useDispatch()
-    
-    const handleClick = () => {
-        // console.log("unit",inputUnit , outputUnit);
-        const data={
-            inputUnit:inputUnit,
-            outputUnit:outputUnit,
-            val:val
-        }
-        dispatch(convertUnit(data))
-    }
+    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+        setValue(newValue);
+    };
 
     const validUser = localStorage.getItem("user")
     // console.log(validUser);
-
-    useEffect(()=>{
-        if(!validUser){
+    useEffect(() => {
+        if (!validUser) {
             navigate("/login")
         }
-    },[validUser])
+    }, [validUser])
 
     return (
-        <div>
-            <Header/>
-            <Container className='w-50 mt-2' 
-            style={{background:"linear-gradient(to right, #36d1dc, #5b86e5)",
-            padding:"50px",
-            borderRadius:"10px",
-            fontFamily:"cursive",
-            boxShadow:"rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
-            }}>
-                <div style={{textAlign:"center" ,marginTop:"-30px"}}>
-                <SiConvertio className='button2' style={{fontSize:"60px"}}/>
+        <div style={{ backgroundImage: "url('../public/151.jpg')" }}>
+            <Header />
+            <Container className='w-50 mt-2'
+                style={{
+                    background: "linear-gradient(to right, #36d1dc, #5b86e5)",
+                    padding: "50px",
+                    borderRadius: "10px",
+                    fontFamily: "cursive",
+                    boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
+                }}>
+                <div style={{ textAlign: "center", marginTop: "-30px" }}>
+                    <SiConvertio className='button2' style={{ fontSize: "60px" }} />
                 </div>
-                <Form.Label className='mt-2 h3' size="lg">From:</Form.Label>
-                <Form.Select size="lg" onChange={(e) => setInputUnit(e.target.value)}>
-                    <option>Select unit to convert</option>
-                    <option value="KGS">KGS</option>
-                    <option value="GMS">Grams</option>
-                    <option value="MGS">Miligrams</option>
-                    <option value="POUND">Pound</option>
-                    <option value="TONNE">Tonne</option>
-                </Form.Select>
-
-                <Form.Label className='mt-2 h5 text-light' size="lg">Enter Value</Form.Label>
-                <Form.Control type="number" placeholder='Enter Value' onChange={(e) => setVal(e.target.value)}  />
-
-                <Form.Label className='mt-2 h3' size="lg">To:</Form.Label>
-                <Form.Select size="lg" onChange={(e) => setOutputUnit(e.target.value)}>
-                    <option>Select unit to convert</option>
-                    <option value="KGS">KGS</option>
-                    <option value="GMS">Grams</option>
-                    <option value="MGS">Miligrams</option>
-                    <option value="POUND">Pound</option>
-                    <option value="TONNE">Tonne</option>
-                </Form.Select>
-                <Form.Label className='mt-2 h5 text-light' defaultValue={myResult} size="lg">Result</Form.Label>
-
-                <Form.Control disabled type="text" defaultValue={myResult} placeholder='Result' />
-                <div className='d-grid gap-2 mt-3'>
-                    <Button className='button' style={{borderRadius:"10px"}} size='lg' onClick={handleClick}>Convert</Button>
-                </div>
+                <Box sx={{ width: '100%', typography: 'body1', fontFamily: "cursive" }}>
+                    <TabContext value={value}>
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                            <TabList onChange={handleChange} aria-label="lab API tabs example" centered>
+                                <Tab label="Waight" value="1" style={{ color: "white", fontFamily: "cursive",margin:"auto" }} />
+                                <Tab label="Length" value="2" style={{ color: "white", fontFamily: "cursive",margin:"auto"  }} />
+                                <Tab label="Area" value="3" style={{ color: "white", fontFamily: "cursive",margin:"auto"  }} />
+                            </TabList>
+                        </Box>
+                        <TabPanel value="1">
+                            <WaightUnit />
+                        </TabPanel>
+                        <TabPanel value="2">
+                            <Length />
+                        </TabPanel>
+                        <TabPanel value="3">
+                            <AreaUnit/>
+                        </TabPanel>
+                    </TabContext>
+                </Box>
             </Container>
         </div>
     )

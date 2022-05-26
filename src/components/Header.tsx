@@ -1,4 +1,6 @@
 import React from 'react'
+import { Avatar } from '@mui/material'
+import { deepPurple } from '@mui/material/colors';
 import { Button, Container, Navbar } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import "./css/header.css"
@@ -15,12 +17,13 @@ const Header = ({ }: Props) => {
   return (
     <div>
       <>
-        <Navbar bg="dark" variant='dark' style={{ boxShadow: "0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)" }}>
+        <Navbar className='header' style={{ boxShadow: "0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)" }}>
           <Container >
-            <Navbar.Brand href="#home" className='m-auto h1' style={{ fontFamily: "cursive" }}>
+            <Avatar  sx={{ bgcolor: deepPurple[500] }}>A</Avatar>
+            <Navbar.Brand href="#home" className='m-auto h1 text-dark' style={{ fontFamily: "cursive" }}>
               Welcome to Unit Converter
             </Navbar.Brand>
-          <Button variant="outline-light" onClick={handleLogout} >Logout</Button>
+          <Button variant="outline-dark" onClick={handleLogout} >Logout</Button>
           </Container>
         </Navbar>
       </>
