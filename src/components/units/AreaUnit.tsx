@@ -23,11 +23,23 @@ const AreaUnit = (props: Props) => {
         dispatch(areaUnit(data))
     }
 
+    const resetButton =()=>{
+        setVal("")
+        const data = {
+            inputArea: "",
+            outputArea: "",
+            val: 1
+        }
+        dispatch(areaUnit(data))
+        setInputArea("")
+        setOutputArea("")
+    }
+    console.log(myResult);
     return (
         <div>
             <Form.Label className='mt-2 h3' size="lg">From:</Form.Label>
-            <Form.Select size="lg" onChange={(e) => setInputArea(e.target.value)}>
-                <option>Select unit to convert</option>
+            <Form.Select size="lg" value={inputArea} onChange={(e) => setInputArea(e.target.value)}>
+                <option value={""}>Select unit to convert</option>
                 <option value="SquereMeter">Squere Meter</option>
                 <option value="SquereKilometer">Squere Kilometer</option>
                 <option value="SquereCentimeter">Squere Centimeter</option>
@@ -36,11 +48,11 @@ const AreaUnit = (props: Props) => {
             </Form.Select>
 
             <Form.Label className='mt-2 h5 text-light' size="lg">Enter Value</Form.Label>
-            <Form.Control type="number" placeholder='Enter Value' onChange={(e) => setVal(e.target.value)} />
+            <Form.Control type="number" placeholder='Enter Value' value={val} onChange={(e) => setVal(e.target.value)} />
 
             <Form.Label className='mt-2 h3' size="lg">To:</Form.Label>
-            <Form.Select size="lg" onChange={(e) => setOutputArea(e.target.value)}>
-                <option>Select unit to convert</option>
+            <Form.Select size="lg" value={outputArea} onChange={(e) => setOutputArea(e.target.value)}>
+                <option value={""}>Select unit to convert</option>
                 <option value="SquereMeter">Squere Meter</option>
                 <option value="SquereKilometer">Squere Kilometer</option>
                 <option value="SquereCentimeter">Squere Centimeter</option>
@@ -52,6 +64,9 @@ const AreaUnit = (props: Props) => {
             <Form.Control disabled type="text" defaultValue={myResult} placeholder='Result' />
             <div className='d-grid gap-2 mt-3'>
                 <Button className='button' style={{ borderRadius: "10px" }} size='lg' onClick={handleClick}>Convert</Button>
+            </div>
+            <div className='d-grid gap-2 mt-3'>
+                <Button className='button' style={{ borderRadius: "10px",background:"blueviolet" }} size='lg' onClick={resetButton}>Reset</Button>
             </div>
         </div>
     )

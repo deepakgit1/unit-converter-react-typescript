@@ -12,7 +12,7 @@ const changeArea = (state=initialVal,action:AreaType)=>{
                 case "SquereCentimeter": return action.payload.val * 10000;
                 case "SquereMilimeter": return action.payload.val * 1000000;
                 case "Acre": return action.payload.val * 0.0002471054;
-                default:
+                default: return 1
                     break;
             }
         } else if (action.payload.inputArea === "SquereKilometer") {
@@ -22,7 +22,7 @@ const changeArea = (state=initialVal,action:AreaType)=>{
                 case "SquereCentimeter": return action.payload.val * 10000000000;
                 case "SquereMilimeter": return action.payload.val * 1000000000000;
                 case "Acre": return action.payload.val * 247.10538147;
-                default:
+                default: return 1
                     break;
             }
         } else if (action.payload.inputArea === "SquereCentimeter") {
@@ -55,6 +55,8 @@ const changeArea = (state=initialVal,action:AreaType)=>{
                 default:
                     break;
             }
+        }else if(action.payload.inputArea === "" && action.payload.outputArea==="" ){
+            return ""
         }
         console.log(state)
         return state

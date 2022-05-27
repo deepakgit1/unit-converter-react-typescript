@@ -22,11 +22,24 @@ const WaightUnit = (props: Props) => {
         }
         dispatch(convertUnit(data))
     }
+
+    const resetButton =()=>{
+        setVal("")
+        const data = {
+            inputUnit: "",
+            outputUnit: "",
+            val: 1
+        }
+        dispatch(convertUnit(data))
+        setInputUnit("")
+        setOutputUnit("")
+    }
+    
     return (
         <div>
             <Form.Label className='mt-2 h3' size="lg">From:</Form.Label>
-            <Form.Select size="lg" onChange={(e) => setInputUnit(e.target.value)}>
-                <option>Select unit to convert</option>
+            <Form.Select size="lg" value={inputUnit} onChange={(e) => setInputUnit(e.target.value)}>
+                <option value={""}>Select unit to convert</option>
                 <option value="KGS">KGS</option>
                 <option value="GMS">Grams</option>
                 <option value="MGS">Miligrams</option>
@@ -35,11 +48,11 @@ const WaightUnit = (props: Props) => {
             </Form.Select>
 
             <Form.Label className='mt-2 h5 text-light' size="lg">Enter Value</Form.Label>
-            <Form.Control type="number" placeholder='Enter Value' onChange={(e) => setVal(e.target.value)} />
+            <Form.Control type="number" value={val} placeholder='Enter Value' onChange={(e) => setVal(e.target.value)} />
 
             <Form.Label className='mt-2 h3' size="lg">To:</Form.Label>
-            <Form.Select size="lg" onChange={(e) => setOutputUnit(e.target.value)}>
-                <option>Select unit to convert</option>
+            <Form.Select size="lg" value={outputUnit} onChange={(e) => setOutputUnit(e.target.value)}>
+                <option value={""}>Select unit to convert</option>
                 <option value="KGS">KGS</option>
                 <option value="GMS">Grams</option>
                 <option value="MGS">Miligrams</option>
@@ -51,6 +64,9 @@ const WaightUnit = (props: Props) => {
             <Form.Control disabled type="text" defaultValue={myResult} placeholder='Result' />
             <div className='d-grid gap-2 mt-3'>
                 <Button className='button' style={{ borderRadius: "10px" }} size='lg' onClick={handleClick}>Convert</Button>
+            </div>
+            <div className='d-grid gap-2 mt-3'>
+                <Button className='button' style={{ borderRadius: "10px",background:"blueviolet" }} size='lg' onClick={resetButton}>Reset</Button>
             </div>
         </div>
     )

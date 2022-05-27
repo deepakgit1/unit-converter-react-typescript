@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react'
 import { Container } from 'react-bootstrap'
 import { SiConvertio } from "react-icons/si"
-import Header from './Header'
 import { useNavigate } from 'react-router-dom'
 //mui
+import { Tabs } from '@mui/material'
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 //components
 import Length from './units/Length'
+import Header from './Header'
 import WaightUnit from './units/WaightUnit'
-import "../components/css/home.css"
 import AreaUnit from './units/AreaUnit'
+import "../components/css/home.css"
 
 type Props = {}
 
@@ -34,6 +34,13 @@ const Home = (props: Props) => {
         }
     }, [validUser])
 
+    const resetButton=()=>{
+        console.log("Icon clicked");
+    }
+    const handelReset=()=>{
+        
+    }
+
     return (
         <div style={{ backgroundImage: "url('../public/151.jpg')" }}>
             <Header />
@@ -45,26 +52,32 @@ const Home = (props: Props) => {
                     fontFamily: "cursive",
                     boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
                 }}>
-                <div style={{ textAlign: "center", marginTop: "-30px" }}>
-                    <SiConvertio className='button2' style={{ fontSize: "60px" }} />
+                <div onClick={handelReset} className='logoBgImg' style={{ textAlign: "center", marginTop: "-30px"}}>
+                    {/* <SiConvertio className='button2' style={{ fontSize: "60px" }} cursor="pointer" onClick={resetButton} /> */}
+
                 </div>
                 <Box sx={{ width: '100%', typography: 'body1', fontFamily: "cursive" }}>
                     <TabContext value={value}>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                            <TabList onChange={handleChange} aria-label="lab API tabs example" centered>
-                                <Tab label="Waight" value="1" style={{ color: "white", fontFamily: "cursive",margin:"auto" }} />
-                                <Tab label="Length" value="2" style={{ color: "white", fontFamily: "cursive",margin:"auto"  }} />
-                                <Tab label="Area" value="3" style={{ color: "white", fontFamily: "cursive",margin:"auto"  }} />
-                            </TabList>
+                            <Tabs value={value}
+                                onChange={handleChange}
+                                indicatorColor="secondary"
+                                aria-label="secondary tabs example"
+                                centered>
+                                <Tab label="Waight" value="1" style={{ margin: "auto", fontFamily: "cursive", color: "#fff" }} />
+                                <Tab label="Length" value="2" style={{ margin: "auto", fontFamily: "cursive", color: "#fff" }} />
+                                <Tab label="Area" value="3" style={{ margin: "auto", fontFamily: "cursive", color: "#fff" }} />
+                            </Tabs>
                         </Box>
+                    {/* Unit components */}
                         <TabPanel value="1">
-                            <WaightUnit />
+                            <WaightUnit  />
                         </TabPanel>
                         <TabPanel value="2">
                             <Length />
                         </TabPanel>
                         <TabPanel value="3">
-                            <AreaUnit/>
+                            <AreaUnit />
                         </TabPanel>
                     </TabContext>
                 </Box>
