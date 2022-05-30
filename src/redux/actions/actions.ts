@@ -41,7 +41,7 @@ export type LoginType={
     payload: LoginVal
 }
 
-export const convertUnit =(data:any)=>{
+export const convertWaightUnit =(data:any)=>{
     return{
         type:"CONVERT",
         payload:data
@@ -62,7 +62,7 @@ export const areaUnit =(data:any)=>{
     }
 }
 
-export const loginAuth =(data:any)=>{
+export const loginAuth =(data:LoginVal)=>{
     return{
         type:"LOGIN",
         payload:data

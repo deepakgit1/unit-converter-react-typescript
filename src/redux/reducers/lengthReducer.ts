@@ -55,11 +55,9 @@ const changeLength = (state=initialVal,action:LenghtType)=>{
                 default:
                     break;
             }
-        }else if(action.payload.inputLength === "" && action.payload.outputLength==="" ){
-            return ""
         }
         console.log(state)
-        return state
+        return ""
     }else{
         return state
     }

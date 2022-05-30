@@ -55,11 +55,9 @@ const changeUnit = (state=initialVal,action:Action)=>{
                 default:
                     break;
             }
-        }else if(action.payload.inputUnit === "" && action.payload.outputUnit==="" ){
-            return ""
         }
         console.log(state)
-        return state
+        return ""
     }else{
         return state
     }

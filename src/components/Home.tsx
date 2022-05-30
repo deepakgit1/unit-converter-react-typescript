@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
-import { SiConvertio } from "react-icons/si"
 import { useNavigate } from 'react-router-dom'
 //mui
 import { Tabs } from '@mui/material'
@@ -19,27 +18,22 @@ type Props = {}
 
 const Home = (props: Props) => {
 
-    const [value, setValue] = React.useState('1');
+    const [value, setValue] = useState('1');
     const navigate = useNavigate()
 
+    //TabPanel
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };
 
+    //Login
     const validUser = localStorage.getItem("user")
-    // console.log(validUser);
+    
     useEffect(() => {
         if (!validUser) {
             navigate("/login")
         }
     }, [validUser])
-
-    const resetButton=()=>{
-        console.log("Icon clicked");
-    }
-    const handelReset=()=>{
-        
-    }
 
     return (
         <div style={{ backgroundImage: "url('../public/151.jpg')" }}>
@@ -52,10 +46,7 @@ const Home = (props: Props) => {
                     fontFamily: "cursive",
                     boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
                 }}>
-                <div onClick={handelReset} className='logoBgImg' style={{ textAlign: "center", marginTop: "-30px"}}>
-                    {/* <SiConvertio className='button2' style={{ fontSize: "60px" }} cursor="pointer" onClick={resetButton} /> */}
-
-                </div>
+                <div className='logoBgImg' style={{ textAlign: "center", marginTop: "-30px" }}></div>
                 <Box sx={{ width: '100%', typography: 'body1', fontFamily: "cursive" }}>
                     <TabContext value={value}>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -69,9 +60,9 @@ const Home = (props: Props) => {
                                 <Tab label="Area" value="3" style={{ margin: "auto", fontFamily: "cursive", color: "#fff" }} />
                             </Tabs>
                         </Box>
-                    {/* Unit components */}
+                        {/* Unit components */}
                         <TabPanel value="1">
-                            <WaightUnit  />
+                            <WaightUnit />
                         </TabPanel>
                         <TabPanel value="2">
                             <Length />
@@ -86,4 +77,4 @@ const Home = (props: Props) => {
     )
 }
 
-export default Home
+export default Home;

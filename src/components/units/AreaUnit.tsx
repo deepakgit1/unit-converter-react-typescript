@@ -2,18 +2,20 @@ import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { areaUnit } from '../../redux/actions/actions'
+//get state type from store
+import { RootState } from '../../store'
 
 type Props = {}
 
 const AreaUnit = (props: Props) => {
     const [inputArea, setInputArea] = useState<number | string>()
-    const [outputArea, setOutputArea] = useState<any>()
-    const [val, setVal] = useState<any>()
+    const [outputArea, setOutputArea] = useState<number | string>()
+    const [val, setVal] = useState<number | string>("")
 
-    const myResult = useSelector((state: any) => state.changeArea)
+    const myResult = useSelector((state: RootState) => state.changeArea)
     const dispatch = useDispatch()
 
-    const handleClick = () => {
+    const handleConvert = () => {
         // console.log("unit",inputUnit , outputUnit);
         const data = {
             inputArea: inputArea,
@@ -23,7 +25,7 @@ const AreaUnit = (props: Props) => {
         dispatch(areaUnit(data))
     }
 
-    const resetButton =()=>{
+    const resetButton = () => {
         setVal("")
         const data = {
             inputArea: "",
@@ -34,7 +36,7 @@ const AreaUnit = (props: Props) => {
         setInputArea("")
         setOutputArea("")
     }
-    console.log(myResult);
+    // console.log(myResult);
     return (
         <div>
             <Form.Label className='mt-2 h3' size="lg">From:</Form.Label>
@@ -59,14 +61,15 @@ const AreaUnit = (props: Props) => {
                 <option value="SquereMilimeter">Squere Milimeter</option>
                 <option value="Acre">Acre</option>
             </Form.Select>
-            <Form.Label className='mt-2 h5 text-light' defaultValue={myResult} size="lg">Result</Form.Label>
 
+            <Form.Label className='mt-2 h5 text-light' defaultValue={myResult} size="lg">Result</Form.Label>
             <Form.Control disabled type="text" defaultValue={myResult} placeholder='Result' />
+            
             <div className='d-grid gap-2 mt-3'>
-                <Button className='button' style={{ borderRadius: "10px" }} size='lg' onClick={handleClick}>Convert</Button>
+                <Button className='button' style={{ borderRadius: "10px" }} size='lg' onClick={handleConvert}>Convert</Button>
             </div>
             <div className='d-grid gap-2 mt-3'>
-                <Button className='button' style={{ borderRadius: "10px",background:"blueviolet" }} size='lg' onClick={resetButton}>Reset</Button>
+                <Button className='button' style={{ borderRadius: "10px", background: "blueviolet" }} size='lg' onClick={resetButton}>Reset</Button>
             </div>
         </div>
     )
