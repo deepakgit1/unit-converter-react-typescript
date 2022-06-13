@@ -43,11 +43,15 @@ const Login: FC = (props: Props) => {
                 }}>
                 <h1>Please Login</h1>
                 <Form.Label className='mt-2 h5 text-light' size="lg">Username</Form.Label>
-                <Form.Control type="text" placeholder='Enter Username' onChange={(e) => setUserName(e.target.value)} />
+                <Form.Control type="text" placeholder='Enter Username' defaultValue={username} onChange={(e) => setUserName(e.target.value)} />
                 <Form.Label className='mt-2 h5 text-light' size="lg">Password</Form.Label>
-                <Form.Control type="password" placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} />
+                <Form.Control type="password" placeholder='Enter Password' defaultValue={password} onChange={(e) => setPassword(e.target.value)} />
                 <div className='d-grid gap-2 mt-3'>
                     <Button className='button' style={{ borderRadius: "10px" }} size='lg' onClick={() => handleSubmit()}>Login</Button>
+                    <Button className='button' style={{ borderRadius: "10px",background:"darkorchid" }} size='lg' onClick={() =>{
+                         setUserName("guest@test.com");
+                         setPassword("guest");
+                    }}>Click to Guest Login</Button>
                 </div>
             </Container>
         </div>

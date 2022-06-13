@@ -5,7 +5,7 @@ const initialVal = "";
 const authUser =(state=initialVal,action:LoginType)=>{
     // console.log(action)
     if(action.type === "LOGIN"){
-        if(action.payload.username === "user" && action.payload.password === "user"){
+        if(action.payload.username === "guest@test.com" && action.payload.password === "guest"){
             localStorage.setItem("user",action.payload.username)
             return state = "user"
         }else if(!action.payload.username || !action.payload.password){

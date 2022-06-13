@@ -13,6 +13,7 @@ const Header = ({ }: Props) => {
   //logout
   const handleLogout = () => {
     localStorage.clear()
+    window.location.reload()
     navigate("/login")
   }
 
